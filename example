@@ -1,0 +1,60 @@
+#include <iostream>
+
+using namespace std;
+
+class Command {
+public:
+    virtual void execute() = 0;
+};
+
+class CommandA : public Command {
+public:
+    void execute() override {
+        cout << " Felicidades elegiste la opcion 1" << endl;
+    }
+};
+
+class CommandB : public Command {
+public:
+    void execute() override {
+        cout << " Felicidades elegiste la opcion 2" << endl;
+    }
+};
+
+class CommandC : public Command {
+public:
+    void execute() override {
+        cout << " Felicidades elegiste la opcion 3" << endl;
+    }
+};
+
+int main() {
+    
+    Command* commands[] = {new CommandA, new CommandB, new CommandC};
+    int choice;
+    
+    do{
+        cout << "Seleccione una opcion:" <<endl;
+        cout <<"1) opcion 1 "<<endl;
+        cout <<"2) opcion 2 "<<endl;
+        cout <<"3) opcion 3 "<<endl;
+            
+        cin >> choice;
+        
+        commands[choice-1]->execute();
+    	// no sabia si podia usar un if para descartar la opciones incorrectas
+      	/*  if (choice >= 1 && choice <= 3) {
+            commands[choice - 1]->execute();
+        } else {
+            std::cout << "Selección no válida." << std::endl;
+        }
+      
+    	*/
+    }while(choice >= 1 && choice <=3);
+    
+    for (int i = 0; i < 3; i++) {
+            delete commands[i];
+        }
+
+    return 0;
+}
